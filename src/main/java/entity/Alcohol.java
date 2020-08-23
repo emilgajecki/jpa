@@ -41,7 +41,7 @@ public class Alcohol {
         this.voltage = voltage;
     }
 
-    public BigDecimal getCapacity() {
+    public BigDecimal getCapacity(BigDecimal bigDecimal) {
         return capacity;
     }
 

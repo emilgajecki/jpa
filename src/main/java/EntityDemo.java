@@ -28,12 +28,12 @@ public class EntityDemo {
         scanner.nextLine();
         return option;
     }
-
+    // wyswietlanie rekordow
     static void printAllEntities (){
         List<Alcohol> list = em.createQuery("from Alcohol ", Alcohol.class).getResultList();
         list.forEach(System.out::println);
     }
-
+    // dodwanie rekordów
     static void addEntitu() {
 
 
@@ -59,6 +59,15 @@ public class EntityDemo {
         em.getTransaction().commit();
         em.close();
     }
+    // kasownie entity
+    static void deleteEntity(){
+        System.out.println("Podaj id do usuniecia");
+        long id = scanner.nextLong();
+        em.getTransaction().begin();
+        Alcohol entity = em.find(Alcohol.class, id);
+        em.remove(entity);
+        em.getTransaction().commit();
+    }
 
     public static void main(String[] args) {
 
@@ -73,6 +82,7 @@ public class EntityDemo {
                 case 3:
                     break;
                 case 4:
+                    deleteEntity();
                     break;
                 case 0:
                     return;

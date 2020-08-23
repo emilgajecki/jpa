@@ -4,22 +4,23 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Scanner;
 
 public class EntityDemo {
 
     static EntityManagerFactory factory = Persistence.createEntityManagerFactory("java6");
     static EntityManager em = factory.createEntityManager();
-    static Scanner scanner= new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
-    static int menu(){
+    static int menu() {
         System.out.print("1. Dodaj encję ");
         System.out.print("2. Wyświetl wszystkie encje ");
         System.out.print("3. Edytuj encję ");
-        System.out.print("4. Usuń encję");
+        System.out.print("4. Usuń encję " );
         System.out.print("0. Wyjście");
 
-        while (!scanner.hasNextInt()){
+        while (!scanner.hasNextInt()) {
             System.out.println("Wpisz nr polecenia!");
         }
 
@@ -28,7 +29,12 @@ public class EntityDemo {
         return option;
     }
 
-    static void addEntitu (){
+    static void printAllEntities (){
+        List<Alcohol> list = em.createQuery("from Alcohol ", Alcohol.class).getResultList();
+        list.forEach(System.out::println);
+    }
+
+    static void addEntitu() {
 
 
         //beer.setId(1);
@@ -56,6 +62,22 @@ public class EntityDemo {
 
     public static void main(String[] args) {
 
-
+        while(true){
+            switch (menu()){
+                case 1:
+                    addEntitu();
+                    break;
+                case 2:
+                    printAllEntities();
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 0:
+                    return;
+                default:
+            }
+        }
     }
 }
